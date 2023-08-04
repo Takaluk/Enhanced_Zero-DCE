@@ -6,4 +6,5 @@ Enhanced Zero-DCE is CSE graduation project focused on augmenting the performanc
 
 [training data](https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view)
 
-[SAM masks for training data]()
+## Enhancement tasks
+[SAM masks for training data](https://drive.google.com/file/d/112zbQ-qCS2ivsa9DZiDnYlz9-lpSpWoX/view?usp=sharing)
