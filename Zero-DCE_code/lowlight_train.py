@@ -15,12 +15,12 @@ from torchvision import transforms
 
 
 def weights_init(m):
-    classname = m.__class__.__name__
-    if classname.find('Conv') != -1:
-        m.weight.data.normal_(0.0, 0.02)
-    elif classname.find('BatchNorm') != -1:
-        m.weight.data.normal_(1.0, 0.02)
-        m.bias.data.fill_(0)
+	classname = m.__class__.__name__
+	if classname.find('Conv') != -1:
+		m.weight.data.normal_(0.0, 0.02)
+	elif classname.find('BatchNorm') != -1:
+		m.weight.data.normal_(1.0, 0.02)
+		m.bias.data.fill_(0)
 
 
 
@@ -34,7 +34,7 @@ def train(config):
 
 	DCE_net.apply(weights_init)
 	if config.load_pretrain == True:
-	    DCE_net.load_state_dict(torch.load(config.pretrain_dir))
+		DCE_net.load_state_dict(torch.load(config.pretrain_dir))
 	train_dataset = dataloader.lowlight_loader(config.lowlight_images_path)		
 	
 	train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=config.train_batch_size, shuffle=True, num_workers=config.num_workers, pin_memory=True)

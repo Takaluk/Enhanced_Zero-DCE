@@ -17,21 +17,18 @@ import Myloss
 
 import light_curve
  
-def lowlight(image_path):
+def lowlight(image_path, DCE_net):
 	os.environ['CUDA_VISIBLE_DEVICES']='0'
 	data_lowlight = Image.open(image_path)
 
 	data_lowlight.show()
 	light_curve.plot_brightness(image_path)
 	data_lowlight = (np.asarray(data_lowlight)/255.0)
-
       
 	data_lowlight = torch.from_numpy(data_lowlight).float()
 	data_lowlight = data_lowlight.permute(2,0,1)
 	data_lowlight = data_lowlight.cuda().unsqueeze(0)
 
-	DCE_net = model.enhance_net_nopool().cuda()
-	DCE_net.load_state_dict(torch.load('snapshots/Epoch'+ str(config.num_epochs - 1) +'.pth'))
 	start = time.time()
 	_,enhanced_image,A = DCE_net(data_lowlight)
 
@@ -65,22 +62,45 @@ def lowlight(image_path):
 		os.makedirs(image_path.replace('/'+image_path.split("/")[-1],''))
 
 	torchvision.utils.save_image(enhanced_image, result_path)
-	after = Image.open(result_path)
-	after.show()
-	light_curve.plot_brightness(result_path)
+
+	if config.show_result:
+		after = Image.open(result_path)
+		after.show()
+	if config.show_plot:
+		light_curve.plot_brightness(result_path)
+
+
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
-	parser.add_argument('--num_epochs', type=int, default=10)
+	parser.add_argument('--imgpath', type=str, default= 'data/test_data')
+	parser.add_argument('--weight', type=int, default= 10)
+	parser.add_argument('--show_result', type=bool ,default=False)
+	parser.add_argument('--show_plot', type=bool ,default=False)
 	config = parser.parse_args()
-# test_images
-	with torch.no_grad():
-		filePath = 'data/test_data/'
-	
-		file_list = os.listdir(filePath)
+  
+	DCE_net = model.enhance_net_nopool().cuda()
+	DCE_net.load_state_dict(torch.load('snapshots/Epoch'+ str(config.weight) +'.pth'))
 
-		for file_name in file_list:
-			test_list = glob.glob(filePath+file_name+"/*") 
-			for image in test_list:
-				# image = image
-				print(image)
-				lowlight(image)
+# RUN
+	for image in glob.glob(config.imgpath + '/*'):
+		print(image)
+		lowlight(image, DCE_net)
+
+
+
+# if __name__ == '__main__':
+# 	parser = argparse.ArgumentParser()
+# 	parser.add_argument('--weight', type=int, default=10)
+# 	config = parser.parse_args()
+# # test_images
+# 	with torch.no_grad():
+# 		filePath = 'data/test_data/'
+	
+# 		file_list = os.listdir(filePath)
+
+# 		for file_name in file_list:
+# 			test_list = glob.glob(filePath+file_name+"/*") 
+# 			for image in test_list:
+# 				# image = image
+# 				print(image)
+# 				lowlight(image)
