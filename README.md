@@ -10,7 +10,7 @@ Enhanced Zero-DCE is CSE graduation project focused on augmenting the performanc
 [Tasks page](https://crawling-hugger-363.notion.site/Enhanced_zero-dce-acacc4c4196f499298f3c5ef18b38b9c?pvs=4)
 
 ## Requirements
-The ㅠasics are same as [original Zero-DCE project](https://github.com/Li-Chongyi/Zero-DCE)
+The basics are same as [original Zero-DCE project](https://github.com/Li-Chongyi/Zero-DCE)
 
 ### LPIPS
 ```
@@ -18,6 +18,7 @@ pip install lpips
 ```
 ### SAM
 [SAM project page](https://github.com/facebookresearch/segment-anything)
+
 cd Zero-DCE_code
 ```
 pip install git+https://github.com/facebookresearch/segment-anything.git
