@@ -6,8 +6,32 @@ Enhanced Zero-DCE is CSE graduation project focused on augmenting the performanc
 
 [training data](https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view)
 
-
 ## Enhancement tasks
 [Tasks page](https://crawling-hugger-363.notion.site/Enhanced_zero-dce-acacc4c4196f499298f3c5ef18b38b9c?pvs=4)
 
-[SAM masks for training data](https://drive.google.com/file/d/112zbQ-qCS2ivsa9DZiDnYlz9-lpSpWoX/view?usp=sharing)
+## Requirements
+The ㅠasics are same as [original Zero-DCE project](https://github.com/Li-Chongyi/Zero-DCE)
+
+### LPIPS
+```
+pip install lpips
+```
+### SAM
+[SAM project page](https://github.com/facebookresearch/segment-anything)
+cd Zero-DCE_code
+```
+pip install git+https://github.com/facebookresearch/segment-anything.git
+pip install -q jupyter_bbox_widget roboflow dataclasses-json supervision
+cd weights
+wget -q https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+```
+### Train
+cd Zero-DCE_code
+```
+python lowlight_train.py --num_epochs 3
+```
+### Test
+cd Zero-DCE_code
+```
+python lowlight_test.py --num_epochs 3
+```
