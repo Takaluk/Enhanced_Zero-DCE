@@ -23,16 +23,17 @@ cd Zero-DCE_code
 ```
 pip install git+https://github.com/facebookresearch/segment-anything.git
 pip install -q jupyter_bbox_widget roboflow dataclasses-json supervision
+mkdir weights
 cd weights
 wget -q https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
 ```
 ### Train
 cd Zero-DCE_code
 ```
-python lowlight_train.py --num_epochs 3
+python lowlight_train.py
 ```
 ### Test
 cd Zero-DCE_code
 ```
-python lowlight_test.py --num_epochs 3
+python lowlight_test.py
 ```
