@@ -4,13 +4,16 @@ Enhanced Zero-DCE is CSE graduation project focused on augmenting the performanc
 ## Original Zero-DCE
 [original project page](https://github.com/Li-Chongyi/Zero-DCE)
 
-[training data](https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view)
-
 ## Enhancement tasks
 [Tasks page](https://crawling-hugger-363.notion.site/Enhanced_zero-dce-acacc4c4196f499298f3c5ef18b38b9c?pvs=4)
 
 ## Requirements
 The basics are same as [original Zero-DCE project](https://github.com/Li-Chongyi/Zero-DCE)
+1. Python 3.7
+2. Pytorch 1.0.0
+3. opencv
+4. torchvision 0.2.1
+5. cuda 10.0
 
 ### LPIPS
 ```
