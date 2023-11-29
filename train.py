@@ -79,18 +79,34 @@ def train(config):
 				print("Loss at iteration", iteration+1, ":", loss.item())
 
 
-	# 기존에 저장된 가중치 파일 중 가장 큰 숫자를 찾기
-	existing_weights = [file for file in os.listdir('.') if file.startswith('weight_')]
-	if existing_weights:
-		latest_iteration = max([int(file.split('_')[1].split('.')[0]) for file in existing_weights])
-	else:
-		latest_iteration = -1
+	# # 기존에 저장된 가중치 파일 중 가장 큰 숫자를 찾기
+	# existing_weights = [file for file in os.listdir('.') if file.startswith('weight_')]
+	# if existing_weights:
+	# 	latest_iteration = max([int(file.split('_')[1].split('.')[0]) for file in existing_weights])
+	# else:
+	# 	latest_iteration = -1
+	
 
-	# 다음 가중치 파일의 숫자를 증가시키기
-	next_iteration = latest_iteration + 1
+	# # 다음 가중치 파일의 숫자를 증가시키기
+	# next_iteration = latest_iteration + 1
+
+	existing_weights = [file for file in os.listdir('snapshot') if file.startswith('weight_') and file.endswith('.h5')]
+	if existing_weights:
+		existing_numbers = [int(file.split('_')[1].split('.')[0]) for file in existing_weights]
+		existing_numbers.sort()  # 숫자를 정렬하여 순서를 확인
+		expected_numbers = list(range(len(existing_numbers)))  # 기대되는 순서
+		next_number = max(existing_numbers) + 1
+
+		# 순서를 확인하며 빠진 숫자를 찾아서 다음 번호로 사용
+		for expected_number in expected_numbers:
+			if expected_number not in existing_numbers:
+				next_number = expected_number
+				break
+	else:
+		next_number = 0
 
 	# 가중치 저장하기
-	torch.save(DCE_net.state_dict(), config.snapshots_folder + "weight_" + str(next_iteration) + '.pth') 		
+	torch.save(DCE_net.state_dict(), config.snapshots_folder + "weight_" + str(next_number) + '.pth') 		
 
 
 
