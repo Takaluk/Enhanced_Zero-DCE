@@ -1,0 +1,4 @@
+__pycache__/
+weights/
+snapshots/
+.DS_Store
