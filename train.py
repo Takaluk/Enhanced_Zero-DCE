@@ -106,7 +106,9 @@ def train(config):
 		next_number = 0
 
 	# 가중치 저장하기
-	torch.save(DCE_net.state_dict(), config.snapshots_folder + "weight_" + str(next_number) + '.pth') 		
+	torch.save(DCE_net.state_dict(), config.snapshots_folder + "/weight_" + str(next_number) + '.pth')
+
+	print('Train finished.')	
 
 
 
