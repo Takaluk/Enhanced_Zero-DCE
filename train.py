@@ -75,8 +75,8 @@ def train(config):
 			torch.nn.utils.clip_grad_norm_(DCE_net.parameters(),config.grad_clip_norm)
 			optimizer.step()
 
-			if ((iteration+1) % config.display_iter) == 0:
-				print("Loss at iteration", iteration+1, ":", loss.item())
+		if ((epoch+1) % config.display_iter) == 0:
+			print("Loss at epoch", epoch+1, ":", loss.item())
 
 	# 기존에 저장된 가중치 파일 중 가장 큰 숫자를 찾기
 	existing_weights = [file for file in os.listdir(config.snapshots_folder) if file.startswith('weight_') and file.endswith('.pth')]
@@ -104,7 +104,7 @@ if __name__ == "__main__":
 
 	# Input Parameters
 	parser.add_argument('--device', type=str, default='cuda')
-	parser.add_argument('--lowlight_images_path', type=str, default="sample_data/test_data")
+	parser.add_argument('--lowlight_images_path', type=str, default="sample_data/train_data")
 	parser.add_argument('--lr', type=float, default=0.0001)
 	parser.add_argument('--weight_decay', type=float, default=0.0001)
 	parser.add_argument('--grad_clip_norm', type=float, default=0.1)
