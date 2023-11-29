@@ -36,7 +36,7 @@ def lowlight(config):
 		device = torch.device('cpu')
 
 	DCE_net = model.enhance_net_nopool().to(device)
-	DCE_net.load_state_dict(torch.load('snapshots/Epoch'+ str(config.weight) +'.pth', map_location= device))
+	DCE_net.load_state_dict(torch.load(config.weight, map_location= device))
 	if config.with_sam:
 		if os.path.isfile(config.checkpoint):
 			sam = segmentation.SAM(config.checkpoint, device)
@@ -131,7 +131,7 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 
 	# Input Parameters
-	parser.add_argument('--weight', type=int, default=888)
+	parser.add_argument('--weight', type=int, default='snapshots/Epoch888.pth')
 	parser.add_argument('--device', type=str, default='cuda')
 	parser.add_argument('--with_sam', action='store_true')
 	parser.add_argument('--show_plot', type=bool ,default=False)
