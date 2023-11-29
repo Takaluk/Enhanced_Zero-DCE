@@ -90,7 +90,7 @@ def train(config):
 	# # 다음 가중치 파일의 숫자를 증가시키기
 	# next_iteration = latest_iteration + 1
 
-	existing_weights = [file for file in os.listdir('snapshot') if file.startswith('weight_') and file.endswith('.h5')]
+	existing_weights = [file for file in os.listdir('snapshot') if file.startswith('weight_') and file.endswith('.pth')]
 	if existing_weights:
 		existing_numbers = [int(file.split('_')[1].split('.')[0]) for file in existing_weights]
 		existing_numbers.sort()  # 숫자를 정렬하여 순서를 확인
