@@ -136,7 +136,7 @@ if __name__ == '__main__':
 	parser.add_argument('--with_sam', action='store_true')
 	parser.add_argument('--show_plot', type=bool ,default=False)
 	parser.add_argument('--show_result', type=bool ,default=False)
-	parser.add_argument('--src_img_path', type=str, default='data/test_data')
+	parser.add_argument('--src_img_path', type=str, default='sample_data/test_data')
 	parser.add_argument('--dst_img_path', type=str, default=None)
 	parser.add_argument('--checkpoint', type=str ,default="weights/sam_vit_h_4b8939.pth")
 	
