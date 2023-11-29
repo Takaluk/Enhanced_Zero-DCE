@@ -131,7 +131,7 @@ if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
 
 	# Input Parameters
-	parser.add_argument('--weight', type=int, default='snapshots/Epoch888.pth')
+	parser.add_argument('--weight', type=str, default='snapshots/Epoch888.pth')
 	parser.add_argument('--device', type=str, default='cuda')
 	parser.add_argument('--with_sam', action='store_true')
 	parser.add_argument('--show_plot', type=bool ,default=False)
