@@ -128,7 +128,7 @@ def lowlight(config):
 		if config.show_plot:
 			light_curve.plot_brightness(result_path)
 	
-	print(f"Inference finished. Results saved to {result_folder_path}.")
+	print(f"\nInference finished. Results saved to {result_folder_path}.")
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()

@@ -39,7 +39,10 @@ def train(config):
 	DCE_net.apply(weights_init)
 	if config.load_pretrain == True:
 		DCE_net.load_state_dict(torch.load(config.pretrain_dir, map_location= device))
-	train_dataset = dataloader.lowlight_loader(img_folder_path)		
+	train_dataset = dataloader.lowlight_loader(img_folder_path)	
+	if len(train_dataset) < 1:
+		print('\nNo .jpg file found. Please check your lowlight_images_path.')
+		return
 	train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=config.train_batch_size, shuffle=True, num_workers=config.num_workers, pin_memory=True)
 
 	L_color = Myloss.L_color()
@@ -94,7 +97,7 @@ def train(config):
 	# 가중치 저장하기
 	torch.save(DCE_net.state_dict(), config.snapshots_folder + "/weight_" + str(next_number) + '.pth')
 
-	print(f'Train finished. weight_{str(next_number)}.pth saved to {config.snapshots_folder}.')	
+	print(f'\nTrain finished. weight_{str(next_number)}.pth saved to {config.snapshots_folder}.')	
 
 
 
