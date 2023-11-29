@@ -58,7 +58,7 @@ def train(config):
 
 			img_lowlight = img_lowlight.to(device)
 
-			enhanced_image,A  = DCE_net(img_lowlight)
+			enhanced_image_, enhanced_image,A  = DCE_net(img_lowlight)
 
 			Loss_TV = 200*L_TV(A)
 			loss_spa = torch.mean(L_spa(enhanced_image, img_lowlight))
