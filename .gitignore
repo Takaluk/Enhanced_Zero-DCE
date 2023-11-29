@@ -1,7 +1,7 @@
 __pycache__/
 weights/
-snapshots/
+snapshots/*
 .DS_Store
 
-!snapshots/Epoch888.pth
-!snapshots/Epoch999.pth
+!snapshots/weight_888.pth
+!snapshots/weight_999.pth
