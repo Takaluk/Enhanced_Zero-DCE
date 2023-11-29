@@ -34,11 +34,11 @@ The basics are same as [original Zero-DCE project](https://github.com/Li-Chongyi
 10. dataclasses-json 
 11. supervision
 
-### Train
+## Train
 ```
 python train.py
 ```
-### Test
+## Test
 ```
 python infer.py
 ```
