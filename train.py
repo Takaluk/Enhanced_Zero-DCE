@@ -80,7 +80,7 @@ def train(config):
 
 	# 기존에 저장된 가중치 파일 중 가장 큰 숫자를 찾기
 	existing_weights = [file for file in os.listdir(config.snapshots_folder) if file.startswith('weight_') and file.endswith('.pth')]
-	existing_numbers = [int(file.split('_')[1].split('.')[0]) for file in existing_weights if int(file.split('_')[1].split('.')[0]) != 888 or int(file.split('_')[1].split('.')[0]) != 999]
+	existing_numbers = [int(file.split('_')[1].split('.')[0]) for file in existing_weights if int(file.split('_')[1].split('.')[0]) != 888 and int(file.split('_')[1].split('.')[0]) != 999]
 	if existing_numbers:
 		max_existing_number = max(existing_numbers)
 	else:
