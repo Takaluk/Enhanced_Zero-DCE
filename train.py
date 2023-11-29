@@ -1,18 +1,15 @@
-import torch
-import torch.nn as nn
-import torchvision
-import torch.backends.cudnn as cudnn
-import torch.optim
-import os
-import sys
 import argparse
-import time
+import os
+import warnings
+
+import torch
+import torch.optim
+
 import dataloader
 import model
 import Myloss
-import numpy as np
-from torchvision import transforms
 
+# warnings.filterwarnings("ignore", category=UserWarning) 
 
 def weights_init(m):
 	classname = m.__class__.__name__
@@ -61,7 +58,7 @@ def train(config):
 
 			img_lowlight = img_lowlight.to(device)
 
-			enhanced_image_1,enhanced_image,A  = DCE_net(img_lowlight)
+			enhanced_image,A  = DCE_net(img_lowlight)
 
 			Loss_TV = 200*L_TV(A)
 			loss_spa = torch.mean(L_spa(enhanced_image, img_lowlight))
@@ -80,8 +77,20 @@ def train(config):
 
 			if ((iteration+1) % config.display_iter) == 0:
 				print("Loss at iteration", iteration+1, ":", loss.item())
-			if ((iteration+1) % config.snapshot_iter) == 0:
-				torch.save(DCE_net.state_dict(), config.snapshots_folder + "Epoch" + str(epoch) + '.pth') 		
+
+
+	# 기존에 저장된 가중치 파일 중 가장 큰 숫자를 찾기
+	existing_weights = [file for file in os.listdir('.') if file.startswith('weight_')]
+	if existing_weights:
+		latest_iteration = max([int(file.split('_')[1].split('.')[0]) for file in existing_weights])
+	else:
+		latest_iteration = -1
+
+	# 다음 가중치 파일의 숫자를 증가시키기
+	next_iteration = latest_iteration + 1
+
+	# 가중치 저장하기
+	torch.save(DCE_net.state_dict(), config.snapshots_folder + "weight_" + str(next_iteration) + '.pth') 		
 
 
 
@@ -100,10 +109,9 @@ if __name__ == "__main__":
 	parser.add_argument('--val_batch_size', type=int, default=4)
 	parser.add_argument('--num_workers', type=int, default=4)
 	parser.add_argument('--display_iter', type=int, default=10)
-	parser.add_argument('--snapshot_iter', type=int, default=10)
 	parser.add_argument('--snapshots_folder', type=str, default="snapshots/")
 	parser.add_argument('--load_pretrain', type=bool, default= False)
-	parser.add_argument('--pretrain_dir', type=str, default= "snapshots/Epoch999.pth")
+	parser.add_argument('--pretrain_dir', type=str, default= "snapshots/weight_999.pth")
 
 	config = parser.parse_args()
 
