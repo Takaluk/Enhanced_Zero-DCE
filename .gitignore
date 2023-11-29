@@ -1,5 +1,7 @@
+.gitignore
 data/
 __pycache__/
 test_data/
+test_data_result/
 weights/
 .DS_Store
