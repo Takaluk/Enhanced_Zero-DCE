@@ -1,14 +1,13 @@
+import glob
 import os
+import random
 import sys
 
+import cv2
+import numpy as np
 import torch
 import torch.utils.data as data
-
-import numpy as np
 from PIL import Image
-import glob
-import random
-import cv2
 
 random.seed(1143)
 

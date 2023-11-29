@@ -1,9 +1,11 @@
+import math
+
+#import pytorch_colors as colors
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import math
-#import pytorch_colors as colors
-import numpy as np
+
 
 class enhance_net_nopool(nn.Module):
 

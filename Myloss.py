@@ -1,11 +1,13 @@
+import math
+
+import lpips
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import math
-from torchvision.models.vgg import vgg16
-import numpy as np
 from torchvision import transforms
-import lpips
+from torchvision.models.vgg import vgg16
+
 
 class L_color(nn.Module):
 

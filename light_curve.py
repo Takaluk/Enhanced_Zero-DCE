@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
+
 def plot_brightness(image_path):
     image = Image.open(image_path)
     image = image.convert("L")  #그레이스케일

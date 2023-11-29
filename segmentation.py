@@ -1,14 +1,15 @@
-import os
-import sys
 import argparse
 import glob
+import os
+import sys
+
 import cv2
+import matplotlib.pyplot as plt
+import numpy
+import numpy as np
 import supervision as sv
 import torch
-import numpy as np
-import matplotlib.pyplot as plt
 
-import numpy
 numpy.set_printoptions()
 
 def show_anns(anns):
@@ -33,7 +34,8 @@ class SAM:
 		self.DEVICE = device
 		self.MODEL_TYPE = "vit_h"
 
-		from segment_anything import sam_model_registry, SamAutomaticMaskGenerator, SamPredictor
+		from segment_anything import (SamAutomaticMaskGenerator, SamPredictor,
+		                              sam_model_registry)
 
 		sam = sam_model_registry[self.MODEL_TYPE](self.checkpoint).to(self.DEVICE)
 		self.mask_generator = SamAutomaticMaskGenerator(sam)
