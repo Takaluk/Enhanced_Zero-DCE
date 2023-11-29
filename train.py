@@ -80,19 +80,17 @@ def train(config):
 
 	# 기존에 저장된 가중치 파일 중 가장 큰 숫자를 찾기
 	existing_weights = [file for file in os.listdir(config.snapshots_folder) if file.startswith('weight_') and file.endswith('.pth')]
-	existing_numbers = [int(file.split('_')[1].split('.')[0]) for file in existing_weights]
+	existing_numbers = [int(file.split('_')[1].split('.')[0]) for file in existing_weights if int(file.split('_')[1].split('.')[0]) != 888 or int(file.split('_')[1].split('.')[0]) != 999]
 	if existing_numbers:
 		max_existing_number = max(existing_numbers)
 	else:
 		max_existing_number = -1
 
-	# 빠진 번호부터 생성하기
-	next_number = max_existing_number + 1 if max_existing_number != -1 else 0
-
-	# 이미 존재하는 번호를 무시하고 빠진 번호를 찾기
-	while next_number in existing_numbers:
+	# 888번과 999번을 무시하고 다음 가중치 파일의 숫자를 찾기
+	next_number = max(max_existing_number + 1, 0)
+	while next_number in existing_numbers or next_number == 888 or next_number == 999:
 		next_number += 1
-		
+
 	# 가중치 저장하기
 	torch.save(DCE_net.state_dict(), config.snapshots_folder + "/weight_" + str(next_number) + '.pth')
 
