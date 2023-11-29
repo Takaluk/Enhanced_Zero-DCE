@@ -94,7 +94,7 @@ def train(config):
 	# 가중치 저장하기
 	torch.save(DCE_net.state_dict(), config.snapshots_folder + "/weight_" + str(next_number) + '.pth')
 
-	print('Train finished.')	
+	print(f'Train finished. weight_{str(next_number)}.pth saved to {config.snapshots_folder}.')	
 
 
 

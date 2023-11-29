@@ -25,6 +25,8 @@ def lowlight(config):
 		img_folder_path = img_folder_path[:len(img_folder_path)-1]
 	if result_folder_path is not None and result_folder_path[-1] == '/':
 		result_folder_path = result_folder_path[:len(result_folder_path)-1]
+	if result_folder_path is None:
+		result_folder_path = img_folder_path + '_result'
 
 	if config.device == 'cuda':
 		device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -113,8 +115,7 @@ def lowlight(config):
 
 		print("Loss: " + "{:.10f}".format(loss_spa+loss_col+loss_exp+loss_TV+loss_lp))
 
-		result_path = image_path.replace(img_folder_path, img_folder_path + '_result')if result_folder_path is None else image_path.replace(img_folder_path, result_folder_path)
-		# if not os.path.exists(image_path.replace('/'+image_path.split("/")[-1],'')):
+		result_path = image_path.replace(img_folder_path, result_folder_path)
 		os.makedirs('/'.join(result_path.split('/')[:-1]), exist_ok= True)
 
 		enhanced_image = cv2.normalize(enhanced_image, dst=None, alpha=0, beta=255,norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
@@ -126,6 +127,8 @@ def lowlight(config):
 			plt.show()
 		if config.show_plot:
 			light_curve.plot_brightness(result_path)
+	
+	print(f"Inference finished. Results saved to {result_folder_path}.")
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
