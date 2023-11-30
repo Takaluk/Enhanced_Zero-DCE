@@ -38,7 +38,7 @@ The basics are same as [original Zero-DCE project](https://github.com/Li-Chongyi
 ## Train
 1. Before you train, download training dataset first. <a href="https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view?usp=sharing">Google drive</a> or <a href="https://pan.baidu.com/s/11-u_FZkJ8OgbqcG6763XyA">baidu cloud [password: 1234]</a>
 2. unzip and put the downloaded "train_data" folder to "sample_data" folder.
-3. Run the following code.
+3. Run the following.
 ```
 python train.py
 ```
@@ -51,3 +51,9 @@ python infer.py
 python infer.py --with_sam
 ```
 
+Default checkpoint the SAM uses is `sam_vit_h_4b8939.pth`
+If you want use other checkpoint, download from SAM project page above and run the following.
+
+```
+python infer.py --with_sam --checkpoint {path to your checkpoint}
+```
