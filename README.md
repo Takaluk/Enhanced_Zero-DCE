@@ -34,7 +34,11 @@ The basics are same as [original Zero-DCE project](https://github.com/Li-Chongyi
 10. dataclasses-json 
 11. supervision
 
+
 ## Train
+1. Before you train, download training dataset first. <a href="https://drive.google.com/file/d/1GAB3uGsmAyLgtDBDONbil08vVu5wJcG3/view?usp=sharing">Google drive</a> or <a href="https://pan.baidu.com/s/11-u_FZkJ8OgbqcG6763XyA">baidu cloud [password: 1234]</a>
+2. unzip and put the downloaded "train_data" folder to "sample_data" folder.
+3. Run the following code.
 ```
 python train.py
 ```
@@ -42,3 +46,8 @@ python train.py
 ```
 python infer.py
 ```
+#### Test with SAM (Beta)
+```
+python infer.py --with_sam
+```
+
