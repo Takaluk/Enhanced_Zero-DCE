@@ -52,6 +52,7 @@ python infer.py --with_sam
 ```
 
 Default checkpoint the SAM uses is `sam_vit_h_4b8939.pth`
+
 If you want use other checkpoint, download from SAM project page above and run the following.
 
 ```
